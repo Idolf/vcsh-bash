@@ -1,0 +1,5 @@
+*
+!/.bashrc
+!/.profile
+!/bin
+!/bin/git-prompt.sh
