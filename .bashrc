@@ -108,7 +108,7 @@ alias mosml='rlwrap mosml -P full'
 alias cal='cal -m'
 
 function emacs () {
-  (/usr/bin/emacs -D $@ </dev/null >/dev/null 2>/dev/null &)
+  (/usr/bin/env emacs -D $@ </dev/null >/dev/null 2>/dev/null &)
 }
 
 export MANSECT="2,3,1,4,5,6,7,8,9"
