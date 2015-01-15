@@ -126,3 +126,5 @@ fi
 for d in /opt/*/bin; do
   export PATH=$PATH:$d
 done
+
+[[ -s /home/freaken/.autojump/etc/profile.d/autojump.sh ]] && source /home/freaken/.autojump/etc/profile.d/autojump.sh
