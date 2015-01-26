@@ -1,24 +1,16 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-. /etc/bash_completion
-#[ -f /etc/profile.d/bash_completion.sh ] && . /etc/profile.d/bash_completion.sh ]
-#
-#[ -f ~/bin/git-prompt.sh ] && . ~/bin/git-prompt.sh
+# history
+HISTCONTROL=ignoreboth
+HISTFILESIZE=50000
+HISTSIZE=50000
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-export HISTFILESIZE=100000
-export HISTSIZE=100000
-
-# Ignore duplicates and spaces in front of a command
-export HISTCONTROL=ignoreboth
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+# options
 shopt -s cdspell
 shopt -s globstar
+shopt -s histappend
+shopt -s checkwinsize
 shopt -u mailwarn
 unset MAILCHECK
 
@@ -57,12 +49,13 @@ NC="\e[m"               # Color Reset
 
 ALERT=${BWhite}${On_Red} # Bold White on red background
 
-# Main prompt
-PS1="\[\033[01;32m\]\u@\h:\[\033[01;34m\]\w\$\[\033[00m\] "
-
 PS1='$(git branch &>/dev/null;\
 # in a git repo
 if [ $? -eq 0 ]; then \
+    n=$(git stash list --no-color 2>/dev/null | wc -l | tr -d "\\n") ; \
+    if [ "$n" -ne "0" ] ; then \
+        echo -ne "\[${BRed}\]${n}\[${NC}\]:" ; \
+    fi ; \
     echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
   if [ "$?" -eq "0" ]; then \
     # Clean repository - nothing to commit
@@ -87,18 +80,41 @@ fi
 
 PS1="${PS1}> "
 
-#alias ls='colorls -G'
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    # alias dir='dir --color=auto'
+    # alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+# proper man section order for a brogrammer
+MANSECT=2:3:1:4:5:6:7:8:9
+
+# Set the pager and editor
+export PAGER=less
+export EDITOR=vim
+
+# "aliases"
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-alias gdb='gdb -q -n -x ~/.gdbinit'
 alias mtr='mtr -t'
+alias mkdir='mkdir -pv'
+function mkdircd () { mkdir -pv "$@" && eval cd "\"\$$#\""; }
+alias gdb='gdb -q -n -x ~/.gdbinit'
 alias strings='strings -a'
-#alias netstat='netstat -46p'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -108,15 +124,23 @@ alias gcc='gcc -Wall -Wextra -pedantic -O3'
 alias mosml='rlwrap mosml -P full'
 
 function emacs () {
-  (/usr/bin/env emacs -D $@ </dev/null >/dev/null 2>/dev/null &)
+    (/usr/bin/env emacs --no-splash $@ </dev/null >/dev/null 2>/dev/null &)
+}
+function doit () {
+    if [ ! -f doit.py ] ; then
+        cat > doit.py <<EOF
+#!/usr/bin/env python2
+from pwn import *
+context(arch = 'i386')
+
+EOF
+        chmod +x doit.py
+    fi
+    emacs doit.py +3
 }
 
-export MANSECT="2,3,1,4,5,6,7,8,9"
-export PAGER=less
-export EDITOR=vim
 
-[[ -s /etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh
-
+source /usr/share/autojump/autojump.bash
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/local/sbin
 
 if [ -d $HOME/.cabal/bin ]; then
