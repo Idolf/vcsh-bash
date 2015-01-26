@@ -1,15 +1,15 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-. /opt/bash-completion/etc/profile.d/bash_completion.sh
-
-[ -f ~/bin/git-prompt.sh ] && . ~/bin/git-prompt.sh
+. /etc/bash_completion
+#[ -f /etc/profile.d/bash_completion.sh ] && . /etc/profile.d/bash_completion.sh ]
+#
+#[ -f ~/bin/git-prompt.sh ] && . ~/bin/git-prompt.sh
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 export HISTFILESIZE=100000
 export HISTSIZE=100000
-export HISTFILE=$HOME/.bash_history2
 
 # Ignore duplicates and spaces in front of a command
 export HISTCONTROL=ignoreboth
@@ -87,10 +87,11 @@ fi
 
 PS1="${PS1}> "
 
-alias ls='colorls -G'
-#alias grep='grep --color=auto'
-#alias fgrep='fgrep --color=auto'
-#alias egrep='egrep --color=auto'
+#alias ls='colorls -G'
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
@@ -105,7 +106,6 @@ alias .....='cd ../../../..'
 alias ipython='ipython --no-banner'
 alias gcc='gcc -Wall -Wextra -pedantic -O3'
 alias mosml='rlwrap mosml -P full'
-alias cal='cal -m'
 
 function emacs () {
   (/usr/bin/env emacs -D $@ </dev/null >/dev/null 2>/dev/null &)
@@ -114,6 +114,10 @@ function emacs () {
 export MANSECT="2,3,1,4,5,6,7,8,9"
 export PAGER=less
 export EDITOR=vim
+
+[[ -s /etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh
+
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/local/sbin
 
 if [ -d $HOME/.cabal/bin ]; then
   export PATH=$HOME/.cabal/bin:$PATH
@@ -124,7 +128,7 @@ if [ -d $HOME/bin ]; then
 fi
 
 for d in /opt/*/bin; do
-  export PATH=$PATH:$d
+  if [ "$d" != "/opt/*/bin" ]; then
+    export PATH=$PATH:$d
+  fi
 done
-
-[[ -s /home/freaken/.autojump/etc/profile.d/autojump.sh ]] && source /home/freaken/.autojump/etc/profile.d/autojump.sh
