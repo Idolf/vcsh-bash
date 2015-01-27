@@ -1,7 +1,8 @@
 *
 !/.bashrc
+!/bin
+!/bin/git-prompt.sh
+!/.environment
 !/.gitignore.d
 !/.gitignore.d/bash
 !/.profile
-!/bin
-!/bin/git-prompt.sh

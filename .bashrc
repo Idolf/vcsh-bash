@@ -99,13 +99,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# proper man section order for a brogrammer
-MANSECT=2:3:1:4:5:6:7:8:9
-
-# Set the pager and editor
-export PAGER=less
-export EDITOR=vim
-
 # "aliases"
 alias rm='rm -i'
 alias cp='cp -i'
@@ -141,18 +134,5 @@ EOF
 
 
 source /usr/share/autojump/autojump.bash
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin:/usr/local/sbin
 
-if [ -d $HOME/.cabal/bin ]; then
-  export PATH=$HOME/.cabal/bin:$PATH
-fi
-
-if [ -d $HOME/bin ]; then
-  export PATH=$HOME/bin:$PATH
-fi
-
-for d in /opt/*/bin; do
-  if [ "$d" != "/opt/*/bin" ]; then
-    export PATH=$PATH:$d
-  fi
-done
+[ -f ~/.environment ] && . ~/.environment

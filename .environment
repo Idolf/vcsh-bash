@@ -1,0 +1,33 @@
+# proper man section order for a brogrammer
+export MANSECT=2:3:1:4:5:6:7:8:9
+
+# Set up common programs
+export PAGER=less
+export EDITOR=vim
+export BROWSER=chromium
+
+# Update path
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/local/sbin:/usr/sbin:/sbin
+if [ -d $HOME/.cabal/bin ]; then
+  export PATH=$HOME/.cabal/bin:$PATH
+fi
+
+if [ -d $HOME/bin ]; then
+  export PATH=$HOME/bin:$PATH
+fi
+
+for d in /opt/*/bin; do
+  if [ "$d" != "/opt/*/bin" ]; then
+    export PATH=$PATH:$d
+  fi
+done
+
+if [ -d $HOME/ida-6.6 ]; then
+  export PATH=$PATH:$HOME/ida-6.6
+fi
+
+# Various X stuff
+export LC_CTYPE=en_US.UTF-8
+export GTK_IM_MODULE=xim
+export LESSCHARSET=utf-8
+export HS_ENCODING=UTF-8
