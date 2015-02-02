@@ -31,3 +31,11 @@ export LC_CTYPE=en_US.UTF-8
 export GTK_IM_MODULE=xim
 export LESSCHARSET=utf-8
 export HS_ENCODING=UTF-8
+
+# Rust stuff
+if [ "x$LD_LIBRARY_PATH" = "x" ]; then
+  NEW_PATH=
+else
+  NEW_PATH=:$LD_LIBRARY_PATH
+fi
+export LD_LIBRARY_PATH=$HOME/.multirust/toolchains/beta/lib$NEW_PATH
