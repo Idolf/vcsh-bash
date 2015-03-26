@@ -16,11 +16,12 @@ if [ -d $HOME/bin ]; then
   export PATH=$HOME/bin:$PATH
 fi
 
-for d in /opt/*/bin; do
+for _d in /opt/*/bin; do
   if [ "$d" != "/opt/*/bin" ]; then
-    export PATH=$PATH:$d
+    export PATH=$PATH:$_d
   fi
 done
+unset _d
 
 if [ -d $HOME/ida-6.6 ]; then
   export PATH=$PATH:$HOME/ida-6.6
