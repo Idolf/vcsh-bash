@@ -6,7 +6,7 @@ export PAGER=less
 export EDITOR=vim
 export BROWSER=chromium
 
-# Update path
+# Update PATH
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/local/sbin:/usr/sbin:/sbin
 if [ -d $HOME/.cabal/bin ]; then
   export PATH=$HOME/.cabal/bin:$PATH
@@ -26,6 +26,18 @@ unset _d
 if [ -d $HOME/ida-6.6 ]; then
   export PATH=$PATH:$HOME/ida-6.6
 fi
+
+# Update PYTHONPATH
+for _d in /opt/*/lib/python2.7/dist-packages/; do
+  if [ "$d" != "/opt/*/lib/python2.7/dist-packages/" ]; then
+    if [ "x$PYTHONPATH" = "x" ]; then
+      export PYTHONPATH=$_d
+    else
+      export PYTHONPATH=$PYTHONPATH:$_d
+    fi
+  fi
+done
+unset _d
 
 # Various X stuff
 export LC_CTYPE=en_US.UTF-8
