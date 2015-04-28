@@ -52,3 +52,6 @@ else
   NEW_PATH=:$LD_LIBRARY_PATH
 fi
 export LD_LIBRARY_PATH=$HOME/.multirust/toolchains/beta/lib$NEW_PATH
+
+# Make sure GCC is hardened by default
+export DEB_BUILD_HARDENING=1
