@@ -119,19 +119,6 @@ alias mosml='rlwrap mosml -P full'
 function emacs () {
     (/usr/bin/env emacs --no-splash $@ </dev/null >/dev/null 2>/dev/null &)
 }
-function doit () {
-    if [ ! -f doit.py ] ; then
-        cat > doit.py <<EOF
-#!/usr/bin/env python2
-from pwn import *
-context(arch = 'i386')
-
-EOF
-        chmod +x doit.py
-    fi
-    emacs doit.py +3
-}
-
 
 source /usr/share/autojump/autojump.bash
 
