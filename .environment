@@ -8,8 +8,8 @@ export BROWSER=chromium-browser
 
 # Update PATH
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
-if [ -d $HOME/.cabal/bin ]; then
-  export PATH=$HOME/.cabal/bin:$PATH
+if [ -d $HOME/.local/bin ]; then
+  export PATH=$HOME/.local/bin:$PATH
 fi
 
 if [ -d $HOME/bin ]; then
