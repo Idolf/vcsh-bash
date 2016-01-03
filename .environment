@@ -31,7 +31,7 @@ fi
 if [ -d "/opt/z3/py-pkg" ]; then
   if [ "x$PYTHONPATH" = "x" ]; then
     export PYTHONPATH=/opt/z3/py-pkg
-  else
+  elif ! echo "$PYTHONPATH" | grep -q /opt/z3/py-pkg; then
     export PYTHONPATH=$PYTHONPATH:/opt/z3/py-pkg
   fi
 fi
