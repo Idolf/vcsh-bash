@@ -28,6 +28,7 @@ if [ -d $HOME/ida-6.6 ]; then
 fi
 
 # Update PYTHONPATH
+export PYTHONPATH=
 for _d in /opt/*/lib/python2.7/dist-packages/; do
   if [ "$d" != "/opt/*/lib/python2.7/dist-packages/" ]; then
     if [ "x$PYTHONPATH" = "x" ]; then
