@@ -117,6 +117,7 @@ alias gcc='gcc -Wall -Wextra -pedantic -O3'
 alias mosml='rlwrap mosml -P full'
 alias pps='ps --ppid 2 -p 2 --deselect hfw'
 alias dmesg='dmesg -xe'
+alias zathura='zathura --fork'
 
 function emacs () {
     (/usr/bin/env emacs --no-splash $@ </dev/null >/dev/null 2>/dev/null &)
