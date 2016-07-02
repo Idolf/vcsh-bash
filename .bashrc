@@ -126,3 +126,6 @@ function emacs () {
 source /usr/share/autojump/autojump.bash
 
 [ -f ~/.environment ] && . ~/.environment
+if [ -f ~/gcloud/google-cloud-sdk/completion.bash.inc ]; then
+  source ~/gcloud/google-cloud-sdk/completion.bash.inc
+fi

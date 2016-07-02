@@ -9,13 +9,11 @@ export XDG_RUNTIME_DIR=$HOME/.config/
 
 # Update PATH
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
-if [ -d $HOME/.local/bin ]; then
-  export PATH=$HOME/.local/bin:$PATH
-fi
-
-if [ -d $HOME/bin ]; then
-  export PATH=$HOME/bin:$PATH
-fi
+for _d in bin .local/bin .cargo/bin; do
+  if [ -d $HOME/$_d ]; then
+    export PATH=$HOME/$_d:$PATH
+  fi
+done
 
 for _d in /opt/*/bin; do
   if [ "$d" != "/opt/*/bin" ]; then
@@ -35,6 +33,11 @@ if [ -d "/opt/z3/py-pkg" ]; then
   elif ! echo "$PYTHONPATH" | grep -q /opt/z3/py-pkg; then
     export PYTHONPATH=$PYTHONPATH:/opt/z3/py-pkg
   fi
+fi
+
+# Add google cloud SDK to the path
+if [ -f "$HOME/gcloud/google-cloud-sdk/path.bash.inc" ]; then
+  source "$HOME/gcloud/google-cloud-sdk/path.bash.inc"
 fi
 
 # Various X stuff
