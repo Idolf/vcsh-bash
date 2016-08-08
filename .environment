@@ -53,3 +53,7 @@ else
   NEW_PATH=:$LD_LIBRARY_PATH
 fi
 export LD_LIBRARY_PATH=$HOME/.multirust/toolchains/beta/lib$NEW_PATH
+export CARGO_HOME=$HOME/.cargo
+
+# This is to have emacs search in the code
+export RUST_SRC_PATH=$(echo $HOME/.rust-src/rustc-*/src)
