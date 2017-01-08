@@ -127,6 +127,13 @@ function emacs () {
 source /usr/share/autojump/autojump.bash
 
 [ -f ~/.environment ] && . ~/.environment
-if [ -f ~/gcloud/google-cloud-sdk/completion.bash.inc ]; then
-  source ~/gcloud/google-cloud-sdk/completion.bash.inc
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /home/idolf/gcloud/google-cloud-sdk/path.bash.inc ]; then
+  source '/home/idolf/gcloud/google-cloud-sdk/path.bash.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /home/idolf/gcloud/google-cloud-sdk/completion.bash.inc ]; then
+  source '/home/idolf/gcloud/google-cloud-sdk/completion.bash.inc'
 fi
