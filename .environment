@@ -9,7 +9,7 @@ export XDG_RUNTIME_DIR=$HOME/.config/
 
 # Update PATH
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
-for _d in bin .local/bin .cargo/bin; do
+for _d in bin .local/bin .cargo/bin .yarn/bin; do
   if [ -d "$HOME/$_d" ]; then
     export PATH=$HOME/$_d:$PATH
   fi
@@ -54,6 +54,7 @@ for _d in ~/.rustup/toolchains/*{stable,beta,nightly}*/lib; do
   fi
 done
 export CARGO_HOME=$HOME/.cargo
+export WORK=$HOME/git/seasoned
 
 # This is to have emacs search in the code
 unset _d
