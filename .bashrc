@@ -56,7 +56,7 @@ if [ $? -eq 0 ]; then \
     if [ "$n" -ne "0" ] ; then \
         echo -ne "\[${BRed}\]${n}\[${NC}\]:" ; \
     fi ; \
-    echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
+    echo "$(echo `git status` | rg "nothing to commit" > /dev/null 2>&1; \
   if [ "$?" -eq "0" ]; then \
     # Clean repository - nothing to commit
     echo $(__git_ps1 "\[${Green}\]%s\[${NC}\]"); \
@@ -115,7 +115,7 @@ alias .....='cd ../../../..'
 alias ipython='ipython --no-banner'
 alias gcc='gcc -Wall -Wextra -Werror -pedantic -O3 -std=c11'
 alias mosml='rlwrap mosml -P full'
-alias pps='ps --ppid 2 -p 2 --deselect hfw | grep -vi -e [c]hromium -e [k]eybase'
+alias pps='ps --ppid 2 -p 2 --deselect hfw | rg -vi -e [c]hromium -e [k]eybase'
 alias ppsa='ps --ppid 2 -p 2 --deselect hfw'
 alias dmesg='dmesg -xe'
 alias zathura='zathura --fork'
@@ -125,6 +125,7 @@ alias cal='ncal -M -C'
 alias screen-normal='xrandr --output LVDS1 --auto --mode 1366x768 --scale-from 1366x768 && (xrandr --output HDMI1 --off; xrandr --output DP1 --off; xrandr --output VGA1 --off)'
 alias screen-pwnies='xrandr --output LVDS1 --off --output DP1 --auto --mode 2560x1600 --brightness 0.85'
 alias screen-tv='xrandr --output LVDS1 --auto --mode 1366x768 --pos 0x0 --scale-from 1920x1080 --output HDMI1 --auto --mode 1920x1080 --pos 0x0'
+alias grep='echo why not rg >&2; sleep 0.5; grep'
 
 function emacs () {
     (/usr/bin/env emacs --no-splash $@ </dev/null >/dev/null 2>/dev/null &)
