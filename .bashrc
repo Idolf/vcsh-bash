@@ -115,17 +115,20 @@ alias .....='cd ../../../..'
 alias ipython='ipython --no-banner'
 alias gcc='gcc -Wall -Wextra -Werror -pedantic -O3 -std=c11'
 alias mosml='rlwrap mosml -P full'
-alias pps='ps --ppid 2 -p 2 --deselect hfw | rg -vi -e [c]hromium -e [k]eybase'
+alias pps='ps --ppid 2 -p 2 --deselect hfw | rg -M0 -vi -e [c]hromium -e [k]eybase'
 alias ppsa='ps --ppid 2 -p 2 --deselect hfw'
 alias dmesg='dmesg -xe'
 alias zathura='zathura --fork'
 alias gssh='gcloud compute ssh --ssh-flag="-o PubkeyAuthentication=yes"'
 alias gscp='gcloud compute scp --scp-flag="-o PubkeyAuthentication=yes"'
-alias cal='ncal -M -C'
+alias cal='ncal -M -b'
 alias screen-normal='xrandr --output LVDS1 --auto --mode 1366x768 --scale-from 1366x768 && (xrandr --output HDMI1 --off; xrandr --output DP1 --off; xrandr --output VGA1 --off)'
 alias screen-pwnies='xrandr --output LVDS1 --off --output DP1 --auto --mode 2560x1600 --brightness 0.85'
 alias screen-tv='xrandr --output LVDS1 --auto --mode 1366x768 --pos 0x0 --scale-from 1920x1080 --output HDMI1 --auto --mode 1920x1080 --pos 0x0'
-alias grep='echo why not rg >&2; sleep 0.5; grep'
+
+function grep() {
+  (echo why not rg >&2; sleep 0.5; /bin/grep --color=auto "$@")
+}
 
 function emacs () {
     (/usr/bin/env emacs --no-splash $@ </dev/null >/dev/null 2>/dev/null &)
