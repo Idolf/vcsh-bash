@@ -29,7 +29,7 @@ fi
 if [ -d "/opt/z3/py-pkg" ]; then
   if [ "x$PYTHONPATH" = "x" ]; then
     export PYTHONPATH=/opt/z3/py-pkg
-  elif ! echo "$PYTHONPATH" | rg -q /opt/z3/py-pkg; then
+  elif ! echo "$PYTHONPATH" | /bin/grep -q /opt/z3/py-pkg; then
     export PYTHONPATH=$PYTHONPATH:/opt/z3/py-pkg
   fi
 fi
@@ -42,7 +42,7 @@ export HS_ENCODING=UTF-8
 
 # Rust stuff
 for _d in ~/.rustup/toolchains/*{stable,beta,nightly}*/lib; do
-  if ! (echo "$_d" | rg -q '/\*(stable|beta|nightly)\*/'); then
+  if ! (echo "$_d" | /bin/grep -q '/\*(stable|beta|nightly)\*/'); then
     if [ -z "$LD_LIBRARY_PATH" ]; then
       export LD_LIBRARY_PATH=$_d
     else

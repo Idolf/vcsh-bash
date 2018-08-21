@@ -1,2 +1,1 @@
 . $HOME/git/net/_net_bash_completion
-. $HOME/git/pwntools/extra/bash_completion.d/shellcraft
