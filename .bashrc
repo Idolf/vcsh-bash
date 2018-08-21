@@ -1,3 +1,8 @@
+if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty7 ]]; then
+  exec startx
+  logout
+fi
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -112,19 +117,20 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias ipython='ipython --no-banner'
+alias ipython='ipython --no-banner --colors Linux'
 alias gcc='gcc -Wall -Wextra -Werror -pedantic -O3 -std=c11'
 alias mosml='rlwrap mosml -P full'
-alias pps='ps --ppid 2 -p 2 --deselect hfw | rg -M0 -vi -e [c]hromium -e [k]eybase'
+alias pps='ps --ppid 2 -p 2 --deselect hfw | rg -M0 -vi -e [c]hromium -e [k]eybase -e code/[c]ode'
 alias ppsa='ps --ppid 2 -p 2 --deselect hfw'
 alias dmesg='dmesg -xe'
 alias zathura='zathura --fork'
 alias gssh='gcloud compute ssh --ssh-flag="-o PubkeyAuthentication=yes"'
 alias gscp='gcloud compute scp --scp-flag="-o PubkeyAuthentication=yes"'
-alias cal='ncal -M -b'
-alias screen-normal='xrandr --output LVDS1 --auto --mode 1366x768 --scale-from 1366x768 && (xrandr --output HDMI1 --off; xrandr --output DP1 --off; xrandr --output VGA1 --off)'
-alias screen-pwnies='xrandr --output LVDS1 --off --output DP1 --auto --mode 2560x1600 --brightness 0.85'
+alias cal='date-stuff'
+alias screen-normal='xrandr --output LVDS1 --auto --mode 1366x768 --scale-from 1366x768 && (for o in HDMI1 DP1 DP2 VGA1; do xrandr --output $o --off; done)'
+alias screen-pwnies='for o in DP1 DP2; do xrandr --output LVDS1 --off --output $o --auto --mode 2560x1600 --brightness 1.0; done'
 alias screen-tv='xrandr --output LVDS1 --auto --mode 1366x768 --pos 0x0 --scale-from 1920x1080 --output HDMI1 --auto --mode 1920x1080 --pos 0x0'
+alias feh='feh --scale-down'
 
 function grep() {
   (echo why not rg >&2; sleep 0.5; /bin/grep --color=auto "$@")
