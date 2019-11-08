@@ -7,6 +7,8 @@ export EDITOR=vim
 export BROWSER=chromium
 export XDG_RUNTIME_DIR=$HOME/.config/
 
+export TIME_STYLE=long-iso
+
 # Update PATH
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 for _d in bin .local/bin .cargo/bin .yarn/bin; do

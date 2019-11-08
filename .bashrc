@@ -127,14 +127,54 @@ alias zathura='zathura --fork'
 alias gssh='gcloud compute ssh --ssh-flag="-o PubkeyAuthentication=yes"'
 alias gscp='gcloud compute scp --scp-flag="-o PubkeyAuthentication=yes"'
 alias cal='date-stuff'
-alias screen-normal='xrandr --output LVDS1 --auto --mode 1366x768 --scale-from 1366x768 && (for o in HDMI1 DP1 DP2 VGA1; do xrandr --output $o --off; done)'
-alias screen-pwnies='for o in DP1 DP2; do xrandr --output LVDS1 --off --output $o --auto --mode 2560x1600 --brightness 1.0; done'
-alias screen-tv='xrandr --output LVDS1 --auto --mode 1366x768 --pos 0x0 --scale-from 1920x1080 --output HDMI1 --auto --mode 1920x1080 --pos 0x0'
+alias screen-normal='(for o in HDMI1 HDMI2 HDMI3 DP1 DP2 VGA1; do xrandr --output $o --off; done); xrandr --output LVDS1 --auto --mode 1366x768 --scale-from 1366x768 --dpi 96'
+alias screen-pwnies='for o in DP1 DP2 HDMI1; do xrandr --output LVDS1 --off --output $o --auto --mode 2560x1600 --brightness 1.0; done'
+alias screen-cmp='for o in DP1 DP2 HDMI1; do xrandr --output LVDS1 --off --output $o --auto --mode 2560x1440 --brightness 1.0; done'
+alias screen-tv='for o in HDMI1 HDMI2 HDMI3; do xrandr --output LVDS1 --auto --mode 1366x768 --pos 0x0 --scale-from 1920x1080 --output $o --auto --mode 1920x1080 --pos 0x0; done'
+alias screen-xiao-tv='for o in DP1 DP2 HDMI1 HDMI2 HDMI3; do xrandr --output LVDS1 --auto --output $o --auto --mode 1920x1080 --left-of LVDS1 --brightness 1.0; done'
+alias screen-xiao='for o in DP1 DP2 HDMI1; do xrandr --output LVDS1 --off --output $o --auto --mode 2560x1600 --brightness 1.0; done'
 alias feh='feh --scale-down'
+alias exa='exa --group-directories-first --header --time-style=long-iso'
+alias l=exa
+alias lg='exa --git-ignore'
+alias ll='exa -l'
+alias l2='exa -T -L2 -l'
+alias l3='exa -T -L3 -l'
+alias lt='exa -T'
 
 function grep() {
-  (echo why not rg >&2; sleep 0.5; /bin/grep --color=auto "$@")
+  if which rg >/dev/null; then
+    echo why not rg >&2
+    sleep 0.5
+  fi
+  /bin/grep --color=auto "$@"
 }
+
+function ls() {
+  if which exa >/dev/null; then
+    echo why not exa >&2
+    sleep 0.5
+  fi
+  /bin/ls --color=auto "$@"
+}
+
+function find() {
+  if which fd >/dev/null; then
+    echo why not fd >&2
+    sleep 0.5
+  fi
+  /usr/bin/find "$@"
+}
+
+function cat() {
+  if which bat >/dev/null && [ -t 1 ]; then
+    echo why not bat >&2
+    sleep 0.5
+  fi
+  echo "$@" >> /tmp/catlog
+  /bin/cat "$@"
+}
+
 
 function emacs () {
     (/usr/bin/env emacs --no-splash $@ </dev/null >/dev/null 2>/dev/null &)
