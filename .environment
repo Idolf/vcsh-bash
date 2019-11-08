@@ -57,7 +57,6 @@ for _d in ~/.rustup/toolchains/*{stable,beta,nightly}*/lib; do
 done
 #export RUSTC_WRAPPER=sccache
 export CARGO_HOME=$HOME/.cargo
-export WORK=$HOME/git/seasoned
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # This is to have emacs search in the code
