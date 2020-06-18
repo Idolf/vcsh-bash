@@ -120,7 +120,7 @@ alias .....='cd ../../../..'
 alias ipython='ipython --no-banner --colors Linux'
 alias gcc='gcc -Wall -Wextra -Werror -pedantic -O3 -std=c11'
 alias mosml='rlwrap mosml -P full'
-alias pps='ps --ppid 2 -p 2 --deselect hfw | rg -M0 -vi -e [c]hromium -e [k]eybase -e code/[c]ode'
+alias pps='ps --ppid 2 -p 2 --deselect hfw | rg -M0 -vi -e [c]hromium -e [k]eybase -e code/[c]ode -e /opt/Signa[l]/ -e [s]ignal-desktop -e /home/user/[t]or-browser_en-US'
 alias ppsa='ps --ppid 2 -p 2 --deselect hfw'
 alias dmesg='dmesg -xe'
 alias zathura='zathura --fork'
@@ -165,16 +165,6 @@ function find() {
   fi
   /usr/bin/find "$@"
 }
-
-function cat() {
-  if which bat >/dev/null && [ -t 1 ]; then
-    echo why not bat >&2
-    sleep 0.5
-  fi
-  echo "$@" >> /tmp/catlog
-  /bin/cat "$@"
-}
-
 
 function emacs () {
     (/usr/bin/env emacs --no-splash $@ </dev/null >/dev/null 2>/dev/null &)

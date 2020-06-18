@@ -59,5 +59,16 @@ done
 export CARGO_HOME=$HOME/.cargo
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
-# This is to have emacs search in the code
+if [ -d /opt/shaderc/lib ]; then
+  export SHADERC_LIB_DIR=/opt/shaderc/lib
+fi
+
+# Nix shell
+if [ -e /home/tethys/.nix-profile/etc/profile.d/nix.sh ]; then
+    . /home/tethys/.nix-profile/etc/profile.d/nix.sh
+fi
+
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
 unset _d
