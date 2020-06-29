@@ -122,7 +122,7 @@ alias gcc='gcc -Wall -Wextra -Werror -pedantic -O3 -std=c11'
 alias mosml='rlwrap mosml -P full'
 alias pps='ps --ppid 2 -p 2 --deselect hfw | rg -M0 -vi -e [c]hromium -e [k]eybase -e code/[c]ode -e /opt/Signa[l]/ -e [s]ignal-desktop -e /home/user/[t]or-browser_en-US'
 alias ppsa='ps --ppid 2 -p 2 --deselect hfw'
-alias dmesg='dmesg -xe'
+alias dmesg='sudo dmesg -xe'
 alias zathura='zathura --fork'
 alias gssh='gcloud compute ssh --ssh-flag="-o PubkeyAuthentication=yes"'
 alias gscp='gcloud compute scp --scp-flag="-o PubkeyAuthentication=yes"'
@@ -136,7 +136,6 @@ alias screen-xiao='for o in DP1 DP2 HDMI1; do xrandr --output LVDS1 --off --outp
 alias feh='feh --scale-down'
 alias exa='exa --group-directories-first --header --time-style=long-iso'
 alias l=exa
-alias lg='exa --git-ignore'
 alias ll='exa -l'
 alias l2='exa -T -L2 -l'
 alias l3='exa -T -L3 -l'
@@ -164,17 +163,6 @@ function find() {
     sleep 0.5
   fi
   /usr/bin/find "$@"
-}
-
-function emacs () {
-    (/usr/bin/env emacs --no-splash $@ </dev/null >/dev/null 2>/dev/null &)
-}
-
-function transfersh () {
-    FILENAME=`basename "$1"`
-    FILEEXT=${FILENAME##*.}
-    curl --upload-file "$1" https://transfer.sh/`date +%s`."$FILEEXT"
-    echo
 }
 
 source /usr/share/autojump/autojump.bash
